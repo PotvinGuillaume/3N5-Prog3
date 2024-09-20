@@ -2,15 +2,23 @@ package fichier
 
 import java.io.File
 
+
+
+
 fun main() {
-    // Tu peux tester tes fonctions en les appellants ici.
+    val bg: Array<String> = arrayOf("allo", "salut", "ofds")
+    lire()
+    ecrire(bg)
 }
 
 /**
  * (1 point) Affiche dans la console le contenu du fichier message.txt qui se trouve dans le projet de départ.
  */
 fun lire() {
-
+    val lignes: List<String> = File("Message.txt").readLines()
+    for(ligne in lignes){
+        println(ligne)
+    }
 }
 
 /**
@@ -22,5 +30,19 @@ fun lire() {
  * Si tout s'est bien passé, on retourne la valeur 1.
  */
 fun ecrire(args: Array<String>): Int {
-    return 1
+
+    if(args.count() != 2){
+        println(IllegalArgumentException(""))
+        return -1
+
+    }
+    else if(File(args[0]).createNewFile()){
+        if(File(args[0]).canWrite()){
+            File(args[0]).writeText(args[1])
+            return 1
+        }
+
+    }
+    return -1
+
 }
