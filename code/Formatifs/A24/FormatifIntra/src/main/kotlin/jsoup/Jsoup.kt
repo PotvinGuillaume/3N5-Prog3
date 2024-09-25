@@ -3,10 +3,15 @@ package jsoup
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
+import java.util.*
 
 fun main() {
-    // Tu peux tester la fonction en l'appelant ici.
+    var ligne: List<String> = emptyList()
+    ligne = Arrays.asList("Comment", "est", "votre", "blanquette?")
+    jsoup(ligne)
 }
+    // Tu peux tester la fonction en l'appelant ici.
+
 
 /**
  *  Cette question vise à évaluer ta capacité à lire de la documentation.
@@ -39,5 +44,12 @@ fun main() {
  * </body>
  */
 fun jsoup(mots: List<String>): Document? {
-    return null
+    var Document: Document = Jsoup.connect("https://info.cegepmontpetit.ca/3N5-Prog3/intraA24-2.html").get()
+    var chaine: String = ""
+    for(mot in mots){
+        chaine += "<div>$mot</div>"
+    }
+    Document = Jsoup.parseBodyFragment(chaine)
+    println(Document.body())
+    return Document
 }
